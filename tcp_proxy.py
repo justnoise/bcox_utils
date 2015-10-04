@@ -42,16 +42,15 @@ def parse_host_port_str(host_port_str):
         port_str = host_port_str
     return host, int(port_str)
 
-def usage():
-    print "usage: python tcp_proxy.py <front_port> <backend_port>"
 
-if len(sys.argv) < 3:
-    usage()
-    sys.exit(1)
+if __name__ == '__main__':
+    if len(sys.argv) < 3:
+        print "usage: python tcp_proxy.py <front_port> <backend_port>"
+        sys.exit(1)
 
-frontend_port = int(sys.argv[1])
-backend_host, backend_port = parse_host_port_str(sys.argv[2])
-print "proxying localhost:{} -> {}:{}".format(frontend_port, backend_host, backend_port)
-add_service(Service(make_proxy(backend_host, backend_port),
-                    port=frontend_port))
-eventloop.run()
+    _, frontend_port = parse_host_port_str(sys.argv[1])
+    backend_host, backend_port = parse_host_port_str(sys.argv[2])
+    print "proxying localhost:{} -> {}:{}".format(frontend_port, backend_host, backend_port)
+    add_service(Service(make_proxy(backend_host, backend_port),
+                        port=frontend_port))
+    eventloop.run()
