@@ -1,4 +1,4 @@
-#! /Users/bcox/.virtualenvs/sauce/bin/python
+#! /usr/bin/python
 import time
 import sys
 print time.ctime(float(sys.argv[1]))
