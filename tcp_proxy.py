@@ -45,7 +45,8 @@ def parse_host_port_str(host_port_str):
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:
-        print "usage: python tcp_proxy.py <front_port> <backend_port>"
+        print "usage: python tcp_proxy.py <frontend_port> <backend_host:port>"
+        print "backend_host defaults to 127.0.0.1 if not specified"
         sys.exit(1)
 
     _, frontend_port = parse_host_port_str(sys.argv[1])
