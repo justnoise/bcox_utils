@@ -6,7 +6,7 @@ do_sync() {
     scp_args=$1
     src_file=$2
     dest_location=$3
-    echo "$src_file $dest_location"
+    echo "scp $scp_args $src_file $dest_location"
     scp $scp_args $src_file $dest_location
 }
 
@@ -20,13 +20,13 @@ fi
 # we'll pass to scp
 scp_args=""
 while [ "$3" != "" ]; do
-    scp_args+=$1
-    scp_args+=" "
+    scp_args+="$1 "
     shift
 done
 
 src=$1
 dest=$2
+
 if [ ! -f "$src" ]; then
     "Could not find $src, are you in the correct directory?"
     exit 2
@@ -48,7 +48,7 @@ last_sync=0
 while true; do
     mtime=`$stat_cmd $src`
     if [ "$mtime" -gt "$last_sync" ]; then
-	do_sync $scp_args $src $dest
+	do_sync "$scp_args" "$src" "$dest"
 	last_sync=`$date_cmd`
     fi
     sleep 2
