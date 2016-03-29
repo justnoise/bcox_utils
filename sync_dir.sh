@@ -15,6 +15,6 @@ fi
 
 while /bin/true
 do
-    rsync -avP --delete --exclude='.*/.git/.*' --exclude "./.tox/.*" --exclude "./_trial_temp.*/" ./ $remote_destination
+    rsync -avP --delete --exclude='.git/' --exclude ".tox/" --exclude "_trial_temp.*/" ./ $remote_destination
     inotifywait -r -e create,delete,modify,move ./
 done
