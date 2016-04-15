@@ -8,13 +8,17 @@ fi
 remote_destination=$1
 
 platform=`uname`
+use_inotify=1
 if [ "$platform" != "Linux" ]; then
-    echo "Your plaform: $platform is not supported"
-    exit 1
+    use_inotify=0
 fi
 
-while /bin/true
+while true
 do
     rsync -avP --delete --exclude='.git/' --exclude ".tox/" --exclude "_trial_temp.*/" ./ $remote_destination
-    inotifywait -r -e create,delete,modify,move ./
+    if [[ use_inotify == 0 ]]; then
+	inotifywait -r -e create,delete,modify,move ./
+    else
+	sleep 3
+    fi
 done
