@@ -1,0 +1,10 @@
+#!/bin/bash
+credsfile=$HOME/.aws/credentials
+access_key_id=$(awk '/^aws_access_key_id/ {print $NF}' $credsfile)
+aws_secret_access_key=$(awk '/^aws_secret_access_key/ {print $NF}' $credsfile)
+
+export AWS_ZONE=us-east-1c
+export AWS_DEFAULT_REGION=us-east-1
+export AWS_REGION=us-east-1
+export AWS_ACCESS_KEY_ID=$access_key_id
+export AWS_SECRET_ACCESS_KEY=$aws_secret_access_key

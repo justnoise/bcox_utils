@@ -51,5 +51,5 @@ while true; do
 	do_sync "$scp_args" "$src" "$dest"
 	last_sync=`$date_cmd`
     fi
-    sleep 2
+    sleep 1
 done
