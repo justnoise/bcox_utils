@@ -1,0 +1,21 @@
+#!/bin/bash
+
+osascript <<EOF
+tell application "System Preferences"
+	reveal pane "com.apple.preference.mouse"
+end tell
+
+delay 1
+
+tell application "System Events"
+	tell process "System Preferences"
+		set rightButtonState to value of radio button "Right" of radio group "Primary mouse button:" of window 1
+		set leftButtonState to value of radio button "Left" of radio group "Primary mouse button:" of window 1
+		if rightButtonState is 1 then
+			click radio button "Left" of radio group "Primary mouse button:" of window 1
+		else
+			click radio button "Right" of radio group "Primary mouse button:" of window 1
+		end if
+	end tell
+end tell
+EOF
